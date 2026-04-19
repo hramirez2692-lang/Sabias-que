@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>App Sabías Que? - Psicopedagogía</title>
+    <style>
+        :root { --primary: #3498db; --bg: #f4f7f6; --text: #2c3e50; }
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: var(--bg); display: flex; justify-content: center; align-items: center; min-height: 100vh; margin: 0; padding: 10px; }
+        .card { background: white; padding: 2rem; border-radius: 20px; box-shadow: 0 15px 35px rgba(0,0,0,0.1); width: 100%; max-width: 450px; text-align: center; box-sizing: border-box; }
+        h1 { color: var(--text); margin-bottom: 1rem; font-size: 1.8rem; }
+        select { width: 100%; padding: 12px; border-radius: 10px; border: 2px solid #ddd; margin-bottom: 1rem; font-size: 1rem; outline: none; }
+        #dato-display { min-height: 180px; display: flex; flex-direction: column; align-items: center; justify-content: center; margin: 15px 0; background: #fdfdfd; border-left: 6px solid var(--primary); padding: 20px; border-radius: 8px; font-size: 1.15rem; color: #34495e; line-height: 1.5; font-style: italic; position: relative; }
+        .btn-group { display: flex; flex-direction: column; gap: 10px; }
+        button { border: none; padding: 14px; border-radius: 12px; font-size: 1rem; cursor: pointer; font-weight: bold; transition: 0.3s; width: 100%; }
+        .btn-main { background: var(--primary); color: white; }
+        .btn-main:hover { background: #2980b9; transform: translateY(-2px); }
+        .btn-ws { background: #25D366; color: white; display: none; text-decoration: none; align-items: center; justify-content: center; }
+        .btn-ws svg { margin-right: 8px; }
+        .cat-tag { font-size: 0.75rem; color: #95a5a6; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 8px; font-weight: bold; }
+    </style>
+</head>
+<body>
+
+<div class="card">
+    <h1>💡 Sabías que...</h1>
+    <select id="categoria">
+        <option value="todas">Cualquier Categoría</option>
+        <option value="Cerebro y Aprendizaje">Cerebro y Aprendizaje</option>
+        <option value="Psicopedagogía y Dificultades">Psicopedagogía y Dificultades</option>
+        <option value="Teorías y Autores">Teorías y Autores</option>
+        <option value="Curiosidades de la Educación">Curiosidades de la Educación</option>
+        <option value="Desarrollo Infantil">Desarrollo Infantil</option>
+        <option value="Inclusión y Diversidad">Inclusión y Diversidad</option>
+        <option value="Técnicas de Estudio">Técnicas de Estudio</option>
+        <option value="Neurociencia Educativa">Neurociencia Educativa</option>
+        <option value="Datos Históricos">Datos Históricos</option>
+        <option value="Salud y Bienestar">Salud y Bienestar</option>
+    </select>
+    
+    <div id="dato-display">
+        <span class="cat-tag" id="tag">Educación</span>
+        <div id="texto">Haz clic en el botón para descubrir un dato fascinante.</div>
+    </div>
+    
+    <div class="btn-group">
+        <button class="btn-main" onclick="obtenerDato()">Lanzar Dato al Azar</button>
+        <a id="btn-ws" class="btn-ws" target="_blank">
+            <svg width="20" height="20" fill="white" viewBox="0 0 24 24"><path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.582 2.128 2.182-.573c.978.58 1.911.928 3.145.929 3.178 0 5.767-2.587 5.768-5.766 0-3.18-2.587-5.771-5.764-5.771zm3.392 8.244c-.144.405-.837.774-1.17.824-.299.045-.677.063-1.092-.069-.252-.08-.575-.187-.988-.365-1.739-.751-2.874-2.502-2.961-2.617-.087-.116-.708-.94-.708-1.793s.448-1.273.607-1.446c.159-.173.346-.217.462-.217s.231.001.332.005c.109.004.258-.041.404.314l.542 1.312c.058.141.096.305.002.494-.095.188-.145.303-.289.469-.144.166-.301.371-.429.498-.144.144-.295.302-.127.592.167.288.745 1.229 1.597 1.983.852.753 1.564 1.042 1.851 1.187.288.144.455.121.623-.073.167-.193.721-.838.914-1.127.192-.288.384-.241.647-.144.264.096 1.681.794 1.969.939.289.144.481.217.553.342.072.126.072.723-.072 1.128z"/></svg>
+            Compartir en WhatsApp
+        </a>
+    </div>
+</div>
+
+<script>
+const biblioteca = {
+    "Cerebro y Aprendizaje": ["El cerebro humano no termina de madurar completamente hasta los 25 años.", "Las emociones son la puerta de entrada al aprendizaje; sin emoción no hay atención.", "El cerebro tiene una capacidad de 'neuroplasticidad' que le permite aprender a cualquier edad.", "Dormir ayuda a consolidar la memoria y lo aprendido durante el día.", "El cerebro gasta cerca del 20% de la energía total del cuerpo cuando estamos estudiando.", "Las neuronas espejo nos permiten aprender por imitación y observación.", "El estrés crónico libera cortisol, lo cual puede dañar el hipocampo y dificultar la memoria.", "La curiosidad libera dopamina, un neurotransmisor que facilita la retención de información.", "El cerebro olvida aproximadamente el 70% de lo aprendido en 24 horas si no se repasa.", "Hacer ejercicio físico aumenta el flujo sanguíneo al cerebro, mejorando la concentración."],
+    "Psicopedagogía y Dificultades": ["La psicopedagogía nació como una rama de la psicología aplicada a la pedagogía a finales del siglo XIX.", "La dislexia no es un problema de visión, sino un trastorno del procesamiento fonológico.", "El TDAH no es falta de voluntad, sino una diferencia en la química cerebral.", "La discalculia es el equivalente a la dislexia pero en el área de las matemáticas.", "El juego es la herramienta de aprendizaje más potente en la infancia.", "La disgrafía afecta la habilidad de escribir de manera legible y ordenada.", "La psicopedagogía también trabaja con adultos para prevenir el deterioro cognitivo.", "El diagnóstico temprano de una dificultad de aprendizaje cambia radicalmente el pronóstico escolar.", "Un niño con dificultades de aprendizaje suele tener una inteligencia promedio o superior.", "La motivación intrínseca (hacerlo por gusto) es más efectiva que la extrínseca."],
+    "Teorías y Autores": ["Jean Piaget propuso que los niños pasan por 4 etapas de desarrollo cognitivo.", "Lev Vygotsky creó el concepto de 'Zona de Desarrollo Próximo'.", "Howard Gardner propuso que no hay una sola forma de ser inteligente.", "María Montessori basó su método en la autonomía y el respeto al ritmo natural.", "Paulo Freire decía que la educación cambia a las personas que cambiarán el mundo.", "Daniel Goleman popularizó la Inteligencia Emocional como factor clave del éxito.", "Albert Bandura demostró que los niños aprenden conductas agresivas por observación.", "Skinner propuso el condicionamiento operante mediante refuerzos y castigos.", "Jerome Bruner defendió el 'aprendizaje por descubrimiento'.", "David Ausubel acuñó el término 'Aprendizaje Significativo'."],
+    "Curiosidades de la Educación": ["El sistema educativo actual tiene su origen en el modelo prusiano industrial.", "En Finlandia casi no hay tareas para la casa y el colegio empieza a los 7 años.", "El aprendizaje colaborativo desarrolla habilidades sociales y empatía.", "La educación artística mejora el rendimiento en matemáticas y lectura.", "Leer en papel facilita una comprensión más profunda que leer en pantallas.", "La música clásica puede ayudar a algunos alumnos a concentrarse.", "Escribir a mano activa más áreas del cerebro que usar un teclado.", "El error debe verse como una oportunidad de aprendizaje y no como un fracaso.", "La gamificación aumenta el compromiso del estudiante.", "El aula invertida propone estudiar la teoría en casa y practicar en clase."],
+    "Desarrollo Infantil": ["Los primeros 1,000 días de vida son cruciales para el desarrollo neuronal.", "El gateo conecta ambos hemisferios cerebrales.", "El lenguaje se desarrolla más rápido si los padres hablan constantemente a sus bebés.", "El exceso de pantallas antes de los 2 años puede retrasar el lenguaje.", "La motricidad fina está ligada al desarrollo del pensamiento lógico.", "El pensamiento abstracto se desarrolla recién en la adolescencia.", "El afecto y el apego seguro son la base de un buen aprendizaje escolar.", "Los niños aprenden más de lo que haces que de lo que dices.", "La frustración es necesaria para desarrollar la resiliencia.", "Leer por placer amplía el vocabulario significativamente."],
+    "Inclusión y Diversidad": ["La inclusión busca adaptar el entorno, no solo integrar al alumno.", "El Diseño Universal para el Aprendizaje (DUA) elimina barreras para todos.", "Las personas con autismo a menudo tienen un pensamiento visual muy desarrollado.", "El lenguaje de señas tiene su propia gramática y estructura.", "La alta capacidad intelectual también requiere apoyo para evitar la desmotivación.", "El bullying afecta la capacidad de aprendizaje debido al estrés del miedo.", "La empatía se puede enseñar y entrenar en la escuela.", "La diversidad en el aula enriquece el pensamiento crítico.", "Existen inteligencias como la naturalista, musical y cinestésica.", "La educación emocional reduce los problemas de conducta."],
+    "Técnicas de Estudio": ["Explicarle lo aprendido a otra persona es la mejor forma de memorizarlo.", "La técnica Pomodoro mejora la productividad y el foco.", "Los mapas conceptuales ayudan a organizar jerárquicamente la información.", "Subrayar todo el texto es ineficiente para el aprendizaje real.", "El repaso espaciado es clave para la memoria a largo plazo.", "Estudiar en diferentes lugares ayuda al cerebro a recuperar información.", "Hacerse preguntas a uno mismo es mejor que volver a leer el libro.", "Beber agua mantiene el cerebro hidratado y alerta.", "Los colores en los apuntes ayudan a clasificar visualmente los conceptos.", "Escuchar música ambiental sin letra es preferible para estudiar."],
+    "Neurociencia Educativa": ["El cerebro derecho es más holístico y el izquierdo más analítico.", "El hipocampo es el centro principal de la memoria.", "La mielina acelera el paso de información entre neuronas.", "Existen periodos críticos donde el cerebro es más apto para ciertos aprendizajes.", "La multitarea es un mito; el cerebro solo cambia de foco rápido.", "El aburrimiento puede fomentar la creatividad en los niños.", "El cerebro busca patrones constantemente para entender el mundo.", "La novedad activa el sistema de recompensa cerebral.", "El feedback inmediato es fundamental para corregir errores.", "El cerebro humano está diseñado para aprender socialmente."],
+    "Datos Históricos": ["La primera universidad del mundo fue fundada por una mujer en Marruecos.", "El sistema Braille fue inventado por un joven de 15 años.", "La palabra 'escuela' viene del griego y significaba 'tiempo libre'.", "En la antigua Grecia, el pedagogo era el esclavo que guiaba al niño.", "El primer jardín infantil fue creado por Friedrich Fröbel en Alemania.", "La educación obligatoria es un concepto moderno del siglo XIX.", "Sócrates nunca escribió nada; conocemos su método por Platón.", "La educación a distancia comenzó por correo en el siglo XIX.", "El ábaco sigue siendo clave para el cálculo mental en varios países.", "La UNESCO considera la alfabetización un derecho humano fundamental."],
+    "Salud y Bienestar": ["Una mala iluminación en el aula causa fatiga visual y distracción.", "Un desayuno nutritivo mejora el rendimiento escolar en un 20%.", "El sedentarismo escolar es un riesgo para el desarrollo cognitivo.", "Las pausas activas reinician la atención del grupo.", "El ruido ambiental excesivo dificulta aprender a leer.", "El mindfulness reduce la ansiedad ante los exámenes.", "El contacto con la naturaleza mejora la atención en niños con TDAH.", "La postura corporal influye en la confianza al aprender.", "La deshidratación leve reduce la memoria de corto plazo.", "El Efecto Pigmalión: las expectativas del docente influyen en el alumno."]
+};
+
+function obtenerDato() {
+    const sel = document.getElementById('categoria').value;
+    let pool = [], catName = "";
+
+    if (sel === "todas") {
+        const keys = Object.keys(biblioteca);
+        catName = keys[Math.floor(Math.random() * keys.length)];
+        pool = biblioteca[catName];
+    } else {
+        catName = sel;
+        pool = biblioteca[sel];
+    }
+
+    const dato = pool[Math.floor(Math.random() * pool.length)];
+    
+    document.getElementById('texto').innerText = dato;
+    document.getElementById('tag').innerText = catName;
+    
+    // Configurar botón WhatsApp
+    const btnWs = document.getElementById('btn-ws');
+    const mensaje = encodeURIComponent(`💡 *¿Sabías que?* \n\n"${dato}" \n\n(Categoría: ${catName})`);
+    btnWs.href = `https://wa.me{mensaje}`;
+    btnWs.style.display = "flex";
+}
+</script>
+</body>
+</html>
+
